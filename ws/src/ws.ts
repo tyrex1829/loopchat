@@ -13,16 +13,11 @@ let user = 0;
 
 wss.on("connection", (ws) => {
   ws.on("error", console.error);
-  console.log(`No error`);
 
   ws.on("message", function message(data, isBinary) {
-    console.log(`inside message`);
     wss.clients.forEach(function each(client) {
-      console.log(`inside forEach`);
       if (client.readyState === WebSocket.OPEN) {
-        console.log(`inside forEach if`);
         client.send(data, { binary: isBinary });
-        console.log(`inside foreach if after`);
       }
     });
   });
